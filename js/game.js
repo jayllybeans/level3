@@ -5,14 +5,14 @@ var context;
 var timer;
 //1000 ms or 1 second / FPS
 var interval = 1000/60;
-var player;
+var player1;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 	
 	//Instantiate the Player
-	player = new GameObject(0, 300, 25, 100);
+	player1 = new GameObject(0, 300, 25, 100);
 	ball = new GameObject(canvas.width/2, canvas.height/2, 50, 50);
 
 	ball.vx = 5;
@@ -41,31 +41,43 @@ function animate()
 	if(w)
 	{
 		//console.log("Moving Up");
-		if (player.y - player.height <= -50)
+		if (player1.y - player1.height <= -50)
 		{
-			player.vy = 0;
+			player1.vy = 0;
 		}
 		else
 		{
-			player.y += -2;
+			player1.y += -2;
 		}
 	}
 	if(s){
 		//console.log("Moving Down");
-		if (player.y + player.height >= (canvas.height + 50))
+		if (player1.y + player1.height >= (canvas.height + 50))
 		{
-			player.vy = 0;
+			player1.vy = 0;
 		}
 		else
 		{
-			player.y += 2;
+			player1.y += 2;
 		}
 	}
 
-	if (ball.x + ball.width/2 >= canvas.width || ball.x - ball.width/2 <= 0)
-        {
-            ball.vx *= -1;
-        }
+		let collisionDetected = player1.hitTestObject(ball);
+
+		if(collisionDetected || ball.x + ball.width/2 >= canvas.width)
+		{
+			if (ball.y < player1.y - player1.y/6)
+			{
+				ball.vx++;
+				ball.vy--;
+			}
+			else if (ball.y > player1.y - player1.y/6)
+			{
+				ball.vx++;
+				ball.vy++;
+			}
+			ball.vx *= -1;
+		}
 
         if(ball.y + ball.height/2 >= canvas.height || ball.y - ball.height/2 <= 0)
         {
@@ -75,8 +87,13 @@ function animate()
         ball.x += ball.vx;
         ball.y += ball.vy;
 
+		if (ball.x + ball.width/2 <= 0)
+		{
+			ball.x = canvas.width/2;
+			ball.y = canvas.height/2;
+		}
 	//Update the Screen
-	player.drawRect();
+	player1.drawRect();
 	ball.drawCircle();
 }
 
