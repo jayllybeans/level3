@@ -150,6 +150,16 @@ function animate()
 			ball.y = canvas.height/2;
 		}
 	//Update the Screen
+	context.save();
+	context.strokeStyle = "yellow";
+	context.beginPath();
+	context.moveTo(498, 0);
+	context.lineTo(498, canvas.height);
+	context.closePath();
+	context.lineWidth = 3;
+	context.stroke();
+	context.restore();
+
 	context.font = "20px Times New Roman";
 	context.textAligin = "center";
 	context.fillText("Player 1 | Player 2", 425, 30);
@@ -158,7 +168,7 @@ function animate()
 	player1.drawRect();
 	player2.drawRect();
 	ball.drawCircle();
-	console.log(p1Wins);
-	console.log(p2Wins);
+	//console.log(p1Wins);
+	//console.log(p2Wins);
 }
 
