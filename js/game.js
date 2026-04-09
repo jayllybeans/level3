@@ -6,6 +6,7 @@ var timer;
 //1000 ms or 1 second / FPS
 var interval = 1000/60;
 var player1;
+var player2;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
@@ -13,7 +14,8 @@ var player1;
 	
 	//Instantiate the Player
 	player1 = new GameObject(0, 300, 25, 100);
-	ball = new GameObject(canvas.width/2, canvas.height/2, 50, 50);
+	player2 = new GameObject(canvas.width, 300, 25, 100, "blue");
+	ball = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "blue");
 
 	ball.vx = 5;
 	ball.vy = 5;
@@ -61,11 +63,37 @@ function animate()
 			player1.y += 2;
 		}
 	}
-
-		let collisionDetected = player1.hitTestObject(ball);
-
-		if(collisionDetected || ball.x + ball.width/2 >= canvas.width)
+	if(arrowUp)
+	{
+		if (player2.y - player2.height <= -50)
 		{
+			player2.vy = 0;
+		}
+		else
+		{
+			player2.y += -2;
+		}
+	}
+	if(arrowDown)
+	{
+		if (player2.y + player2.height >= (canvas.height + 50))
+		{
+			player2.vy = 0;
+		}
+		else
+		{
+			player2.y += 2;
+		}
+	}
+
+		let collisionp1 = player1.hitTestObject(ball);
+
+		if(collisionp1 || ball.x + ball.width/2 >= canvas.width)
+		{
+			if(collisionp1)
+			{
+				ball.color = "red";
+			}
 			if (ball.y < player1.y - player1.y/6)
 			{
 				ball.vx++;
@@ -94,6 +122,7 @@ function animate()
 		}
 	//Update the Screen
 	player1.drawRect();
+	player2.drawRect();
 	ball.drawCircle();
 }
 
