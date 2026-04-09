@@ -2,6 +2,7 @@
 
 var canvas;
 var context;
+var image;
 var timer;
 //1000 ms or 1 second / FPS
 var interval = 1000/60;
@@ -12,12 +13,13 @@ var p2Wins;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");	
+	context = canvas.getContext("2d");
+	image = document.getElementById("ballImage");
 	
 	//Instantiate the Player
 	player1 = new GameObject(0, 300, 25, 100);
 	player2 = new GameObject(canvas.width, 300, 25, 100, "blue");
-	ball = new GameObject(canvas.width/2, canvas.height/2, 25, 25, "purple");
+	ball = new GameObject(canvas.width/2, canvas.height/2, 25, 25);
 
 	ball.vx = 5;
 	ball.vy = 5;
@@ -98,7 +100,7 @@ function animate()
 		{
 			if(collisionp1)
 			{
-				ball.color = "red";
+				//ball.color = "red";
 				if (ball.y < player1.y - player1.y/6)
 				{
 					ball.vx++;
@@ -112,7 +114,7 @@ function animate()
 			}
 			else if (collisionp2)
 			{
-				ball.color = "blue";
+				//ball.color = "blue";
 				if (ball.y < player2.y - player2.y/6)
 				{
 					ball.vx++;
@@ -127,22 +129,22 @@ function animate()
 			ball.vx *= -1;
 		}
 
-        if(ball.y + ball.height/2 >= canvas.height || ball.y - ball.height/2 <= 0)
+        if(ball.y + ball.height >= canvas.height || ball.y - ball.height <= 0)
         {
             ball.vy *= -1;
-			ball.color = "purple";
+			//ball.color = "purple";
         }
 
         ball.x += ball.vx;
         ball.y += ball.vy;
 
-		if (ball.x + ball.width/2 <= 0 || ball.x - ball.width/2 >= canvas.width)
+		if (ball.x + ball.width <= 0 || ball.x - ball.width >= canvas.width)
 		{
-			if(ball.x + ball.width/2 <= 0)
+			if(ball.x + ball.width <= 0)
 			{
 				p2Wins++;
 			}
-			else if(ball.x - ball.width/2 >= canvas.width)
+			else if(ball.x - ball.width >= canvas.width)
 			{
 				p1Wins++;
 			}
@@ -167,7 +169,9 @@ function animate()
 
 	player1.drawRect();
 	player2.drawRect();
-	ball.drawCircle();
+
+	context.drawImage(image, ball.x - ball.width/2, ball.y - ball.width/2, 50, 50);
+	//ball.drawCircle();
 	//console.log(p1Wins);
 	//console.log(p2Wins);
 }
