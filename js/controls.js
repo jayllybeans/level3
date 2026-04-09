@@ -3,8 +3,8 @@ var a = false;
 var d = false;
 var w = false;
 var s = false;
-var upKey = false;
-var downKey = false;
+var arrowUp = false;
+var arrowDown = false;
 
 //Add Event Listeners
 document.addEventListener("keydown", press);
@@ -14,7 +14,7 @@ document.addEventListener("keyup", release);
 function press(e)
 {
 	//---This logs key codes into the browser's console.
-	console.log("Pressed" + e.keyCode);
+	//console.log("Pressed" + e.keyCode);
 	
 	if(e.keyCode == 65)
 	{
@@ -32,16 +32,20 @@ function press(e)
 	{
 		s = true;
 	}
-	if(e.keyCode == 24)
+	if(e.keyCode == 38)
 	{
-		upKey = true;
+		arrowUp = true;
+	}
+	if(e.keyCode == 40)
+	{
+		arrowDown = true;
 	}
 }
 
 function release(e)
 {
 	//---This logs key codes into the browser's console.
-	console.log("Released" + e.keyCode);
+	//console.log("Released" + e.keyCode);
 	
 	if(e.keyCode == 65)
 	{
@@ -59,8 +63,12 @@ function release(e)
 	{
 		s = false;
 	}
-	if(e.keyCode == 24)
+	if(e.keyCode == 38)
 	{
-		upKey = true;
+		arrowUp = false;
+	}
+	if(e.keyCode == 40)
+	{
+		arrowDown = false;
 	}
 }
