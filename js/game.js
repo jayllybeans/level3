@@ -119,16 +119,13 @@ function animate()
 					ball.vy++;
 				}
 			}
-			else
-			{
-				ball.color = "purple";
-			}
 			ball.vx *= -1;
 		}
 
         if(ball.y + ball.height/2 >= canvas.height || ball.y - ball.height/2 <= 0)
         {
             ball.vy *= -1;
+			ball.color = "purple";
         }
 
         ball.x += ball.vx;
