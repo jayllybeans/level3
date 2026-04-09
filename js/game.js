@@ -150,6 +150,11 @@ function animate()
 			ball.y = canvas.height/2;
 		}
 	//Update the Screen
+	context.font = "20px Times New Roman";
+	context.textAligin = "center";
+	context.fillText("Player 1 | Player 2", 425, 30);
+	context.fillText(p1Wins + " - " + p2Wins, 480, 50);
+
 	player1.drawRect();
 	player2.drawRect();
 	ball.drawCircle();
