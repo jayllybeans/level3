@@ -14,7 +14,7 @@ document.addEventListener("keyup", release);
 function press(e)
 {
 	//---This logs key codes into the browser's console.
-	//console.log("Pressed" + e.keyCode);
+	console.log("Pressed" + e.keyCode);
 	
 	if(e.keyCode == 65)
 	{
@@ -41,7 +41,7 @@ function press(e)
 function release(e)
 {
 	//---This logs key codes into the browser's console.
-	//console.log("Released" + e.keyCode);
+	console.log("Released" + e.keyCode);
 	
 	if(e.keyCode == 65)
 	{
@@ -61,6 +61,6 @@ function release(e)
 	}
 	if(e.keyCode == 24)
 	{
-		upKey = false;
+		upKey = true;
 	}
 }
