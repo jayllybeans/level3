@@ -17,7 +17,7 @@ var p2Wins;
 	//Instantiate the Player
 	player1 = new GameObject(0, 300, 25, 100);
 	player2 = new GameObject(canvas.width, 300, 25, 100, "blue");
-	ball = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "purple");
+	ball = new GameObject(canvas.width/2, canvas.height/2, 25, 25, "purple");
 
 	ball.vx = 5;
 	ball.vy = 5;
@@ -54,7 +54,7 @@ function animate()
 		}
 		else
 		{
-			player1.y += -2;
+			player1.y += -5;
 		}
 	}
 	if(s){
@@ -65,7 +65,7 @@ function animate()
 		}
 		else
 		{
-			player1.y += 2;
+			player1.y += 5;
 		}
 	}
 	if(arrowUp)
@@ -76,7 +76,7 @@ function animate()
 		}
 		else
 		{
-			player2.y += -2;
+			player2.y += -5;
 		}
 	}
 	if(arrowDown)
@@ -87,7 +87,7 @@ function animate()
 		}
 		else
 		{
-			player2.y += 2;
+			player2.y += 5;
 		}
 	}
 
