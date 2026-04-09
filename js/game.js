@@ -15,7 +15,7 @@ var player2;
 	//Instantiate the Player
 	player1 = new GameObject(0, 300, 25, 100);
 	player2 = new GameObject(canvas.width, 300, 25, 100, "blue");
-	ball = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "blue");
+	ball = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "purple");
 
 	ball.vx = 5;
 	ball.vy = 5;
@@ -87,22 +87,41 @@ function animate()
 	}
 
 		let collisionp1 = player1.hitTestObject(ball);
+		let collisionp2 = player2.hitTestObject(ball);
 
-		if(collisionp1 || ball.x + ball.width/2 >= canvas.width)
+		if(collisionp1 || collisionp2)
 		{
 			if(collisionp1)
 			{
 				ball.color = "red";
+				if (ball.y < player1.y - player1.y/6)
+				{
+					ball.vx++;
+					ball.vy--;
+				}
+				else if (ball.y > player1.y - player1.y/6)
+				{
+					ball.vx++;
+					ball.vy++;
+				}
 			}
-			if (ball.y < player1.y - player1.y/6)
+			else if (collisionp2)
 			{
-				ball.vx++;
-				ball.vy--;
+				ball.color = "blue";
+				if (ball.y < player2.y - player2.y/6)
+				{
+					ball.vx++;
+					ball.vy--;
+				}
+				else if (ball.y > player2.y - player2.y/6)
+				{
+					ball.vx++;
+					ball.vy++;
+				}
 			}
-			else if (ball.y > player1.y - player1.y/6)
+			else
 			{
-				ball.vx++;
-				ball.vy++;
+				ball.color = "purple";
 			}
 			ball.vx *= -1;
 		}
@@ -115,7 +134,7 @@ function animate()
         ball.x += ball.vx;
         ball.y += ball.vy;
 
-		if (ball.x + ball.width/2 <= 0)
+		if (ball.x + ball.width/2 <= 0 || ball.x - ball.width/2 >= canvas.width)
 		{
 			ball.x = canvas.width/2;
 			ball.y = canvas.height/2;
