@@ -7,6 +7,8 @@ var timer;
 var interval = 1000/60;
 var player1;
 var player2;
+var p1Wins;
+var p2Wins;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
@@ -19,6 +21,9 @@ var player2;
 
 	ball.vx = 5;
 	ball.vy = 5;
+
+	p1Wins = 0;
+	p2Wins = 0;
 
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
@@ -133,6 +138,14 @@ function animate()
 
 		if (ball.x + ball.width/2 <= 0 || ball.x - ball.width/2 >= canvas.width)
 		{
+			if(ball.x + ball.width/2 <= 0)
+			{
+				p2Wins++;
+			}
+			else if(ball.x - ball.width/2 >= canvas.width)
+			{
+				p1Wins++;
+			}
 			ball.x = canvas.width/2;
 			ball.y = canvas.height/2;
 		}
@@ -140,5 +153,7 @@ function animate()
 	player1.drawRect();
 	player2.drawRect();
 	ball.drawCircle();
+	console.log(p1Wins);
+	console.log(p2Wins);
 }
 
